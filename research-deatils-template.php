@@ -25,14 +25,14 @@ get_header();
             <div class="clearfix"></div>
             <span class="entry-meta"><strong>Date of publication:</strong> <?php the_date('d/m/y'); ?></span>
             <br />
-            <!--<span class="entry-meta"><strong>Published by:</strong> Laura Ipsum</span>-->
-            <hr />
+            <span class="entry-meta"><strong>Published by:</strong> Laura Ipsum</span>
+            <hr class="line-stroke">
             <div class="clearfix"></div>
             <span class="entry-meta"><strong>Keywords:</strong> </span>
             <span class="entry-meta">copyright</span>,
             <span class="entry-meta">wallpaper</span>,
             <span class="entry-meta">material culture</span>
-            <hr />
+            <hr class="line-stroke">
             <div class="clearfix"></div>
             <?php
                 the_content();
