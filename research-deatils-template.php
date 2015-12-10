@@ -20,10 +20,24 @@ get_header();
             </h1>
         </div>
         <div class="breather">
-            <span class="entry-meta"><strong>Author(s):</strong></span>
             <span class="entry-meta">
-                <?php $lead_author = get_post_meta( $post->ID, 'authors_section_lead-author', true );
+                <?php
+                    $other_authors = get_post_meta( $post->ID, 'authors_section_other-authors', true );
+                    if (!empty ($other_authors)) {
+                        echo '<strong>Author(s):</strong>';
+                    } else {
+                        echo '<strong>Author:</strong>';
+                    }
+                ?>
+            </span>
+            <span class="entry-meta">
+                <?php
+                    $lead_author = get_post_meta( $post->ID, 'authors_section_lead-author', true );
                     echo $lead_author;
+
+                    if (!empty ($other_authors)) {
+                        echo ', '.$other_authors;
+                    }
                 ?>
             </span>
             <div class="clearfix"></div>
@@ -35,7 +49,13 @@ get_header();
                 ?>
             </span>
             <br />
-            <span class="entry-meta"><strong>Published by:</strong> Laura Ipsum</span>
+                <?php
+                    $published_by = get_post_meta( $post->ID, 'authors_section_published-by', true );
+                    if (!empty($published_by)) {
+                        echo '<span class="entry-meta"><strong>Published by:</strong> '.$published_by.'</span>';
+                    }
+                ?>
+
             <hr class="line-stroke">
             <div class="clearfix"></div>
             <span class="entry-meta"><strong>Keywords:</strong> </span>
