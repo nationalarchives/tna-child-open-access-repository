@@ -24,7 +24,7 @@ get_header();
                 <?php
                     $other_authors = get_post_meta( $post->ID, 'authors_section_other-authors', true );
                     if (!empty ($other_authors)) {
-                        echo '<strong>Author(s):</strong>';
+                        echo '<strong>Authors:</strong>';
                     } else {
                         echo '<strong>Author:</strong>';
                     }
