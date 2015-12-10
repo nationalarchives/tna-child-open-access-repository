@@ -193,3 +193,21 @@ function custom_taxonomy() {
 }
 
 add_action('init', 'custom_taxonomy');
+
+
+/*
+ *
+ * Remove default taxonomy
+ *
+ */
+function unregister_taxonomy(){
+    register_taxonomy('post_tag', array());
+}
+add_action('init', 'unregister_taxonomy');
+
+// Remove menu
+function remove_menus(){
+    remove_menu_page('edit-tags.php?taxonomy=post_tag'); // Post tags
+}
+
+add_action( 'admin_menu', 'remove_menus' );
