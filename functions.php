@@ -170,25 +170,29 @@ add_action('do_meta_boxes', 'upload_pdf');
 function custom_taxonomy() {
 
     $labels = array(
-        'name'              =>  'Keywords',
-        'singular_name'     =>  'Keyword',
-        'search_items'      =>  'Search Keywords',
-        'all_itmes'         =>  'All Keywords',
-        'edit_item'         =>  'Edit Keywords',
-        'update_item'       =>  'Update Keyword',
-        'add_new_item'      =>  'Add New Keyword',
-        'new_item_name'     =>  'New Keyword Name',
-        'menu_name'         =>  'Keyword'
+        'name' => 'Keywords',
+        'singular_name' => 'Keyword',
+        'search_items' => 'Search Keyword',
+        'all_items' => 'All Keywords',
+        'parent_item' => 'Parent Keyword',
+        'parent_item_colon' => 'Parent Keyword:',
+        'edit_item' => 'Edit Keyword',
+        'update_item' => 'Update Keyword',
+        'add_new_item' => 'Add New Keyword Type',
+        'new_item_name' => 'New Keyword Name',
+        'menu_name' => 'Keywords'
     );
+
     $args = array(
-        'hierarchical'      =>  false,
-        'labels'            =>  $labels,
-        'show_ui'           =>  true,
-        'show_admin_column' =>  true,
-        'query_var'         =>  true,
-        'rewrite'           =>  array('slug'    =>  'keyword')
+        'hierarchical' => false,
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'keyword' )
     );
-    register_taxonomy('keyword', array('page'), $args);
+
+    register_taxonomy('type', array('page'), $args);
 
 }
 
