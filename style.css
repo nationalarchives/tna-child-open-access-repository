@@ -12,3 +12,9 @@ Text Domain: tna
 Domain Path: /languages/
 */
 
+
+
+hr.line-stroke{
+    border-top: 1px solid #ddd;
+    background-image:none
+}
