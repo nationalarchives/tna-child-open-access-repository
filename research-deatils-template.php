@@ -21,9 +21,19 @@ get_header();
         </div>
         <div class="breather">
             <span class="entry-meta"><strong>Author(s):</strong></span>
-            <span class="entry-meta">Julie Halls</span>
+            <span class="entry-meta">
+                <?php $lead_author = get_post_meta( $post->ID, 'authors_section_lead-author', true );
+                    echo $lead_author;
+                ?>
+            </span>
             <div class="clearfix"></div>
-            <span class="entry-meta"><strong>Date of publication:</strong> <?php the_date('d/m/y'); ?></span>
+            <span class="entry-meta"><strong>Date of publication:</strong>
+                <?php
+                    $date_published = get_post_meta( $post->ID, 'authors_section_date-published', true );
+                    $format_date = date("d/m/Y", strtotime($date_published));
+                    echo $format_date;
+                ?>
+            </span>
             <br />
             <span class="entry-meta"><strong>Published by:</strong> Laura Ipsum</span>
             <hr class="line-stroke">

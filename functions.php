@@ -7,6 +7,8 @@
  */
 
 
+
+
 class Rational_Meta_Box {
     private $screens = array(
         'page',
@@ -139,16 +141,17 @@ new Rational_Meta_Box;
 
 
 
+
 add_filter( 'admin_post_thumbnail_html', 'add_featured_image_instruction');
 function add_featured_image_instruction( $content ) {
     $content .= '<p><i>Upload the PDF of your research</i></p>';
 
     return str_replace(__('Set featured image'), __('Upload PDF'),$content);
 }
-function people_image_box() {
+function upload_pdf() {
     // Remove the orginal "Set Featured Image" Metabox
     remove_meta_box('postimagediv', 'page', 'side');
     // Add it again with another title
     add_meta_box('postimagediv', __('PDF Section'), 'post_thumbnail_meta_box', 'page', 'normal', 'high');
 }
-add_action('do_meta_boxes', 'people_image_box');
+add_action('do_meta_boxes', 'upload_pdf');
