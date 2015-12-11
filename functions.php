@@ -155,3 +155,63 @@ function upload_pdf() {
     add_meta_box('postimagediv', __('PDF Section'), 'post_thumbnail_meta_box', 'page', 'normal', 'high');
 }
 add_action('do_meta_boxes', 'upload_pdf');
+
+
+
+/*
+ *
+ * ================================================
+ *              Custom Taxonomy
+ * ================================================
+ *
+ */
+
+
+function custom_taxonomy() {
+
+    $labels = array(
+        'name' => 'Keywords',
+        'singular_name' => 'Keyword',
+        'search_items' => 'Search Keyword',
+        'all_items' => 'All Keywords',
+        'parent_item' => 'Parent Keyword',
+        'parent_item_colon' => 'Parent Keyword:',
+        'edit_item' => 'Edit Keyword',
+        'update_item' => 'Update Keyword',
+        'add_new_item' => 'Add New Keyword Type',
+        'new_item_name' => 'New Keyword Name',
+        'menu_name' => 'Keywords'
+    );
+
+    $args = array(
+        'hierarchical' => false,
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'keyword' )
+    );
+
+    register_taxonomy('type', array('page'), $args);
+
+}
+
+add_action('init', 'custom_taxonomy');
+
+
+/*
+ *
+ * Remove default taxonomy
+ *
+ */
+function unregister_taxonomy(){
+    register_taxonomy('post_tag', array());
+}
+add_action('init', 'unregister_taxonomy');
+
+// Remove menu
+function remove_menus(){
+    remove_menu_page('edit-tags.php?taxonomy=post_tag'); // Post tags
+}
+
+add_action( 'admin_menu', 'remove_menus' );
