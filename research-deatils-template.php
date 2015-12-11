@@ -70,7 +70,6 @@ get_header();
                         }
                         echo '<span class="entry-meta">'.$term->name.'</span>';
                     }
-
                 ?>
 
             <hr class="line-stroke">

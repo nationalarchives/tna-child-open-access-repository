@@ -141,6 +141,15 @@ new Rational_Meta_Box;
 
 
 
+/*
+ *
+ * ================================================
+ *              PDF Custom Attachment
+ * ================================================
+ *
+ */
+
+
 
 add_filter( 'admin_post_thumbnail_html', 'add_featured_image_instruction');
 function add_featured_image_instruction( $content ) {
