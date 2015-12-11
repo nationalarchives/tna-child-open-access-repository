@@ -23,10 +23,10 @@ get_header();
             <span class="entry-meta">
                 <?php
                     $other_authors = get_post_meta( $post->ID, 'authors_section_other-authors', true );
-                    if (!empty ($other_authors)) {
-                        echo '<strong>Authors:</strong>';
-                    } else {
+                    if (empty ($other_authors)) {
                         echo '<strong>Author:</strong>';
+                    } else {
+                        echo '<strong>Authors:</strong>';
                     }
                 ?>
             </span>
@@ -59,9 +59,20 @@ get_header();
             <hr class="line-stroke">
             <div class="clearfix"></div>
             <span class="entry-meta"><strong>Keywords:</strong> </span>
-            <span class="entry-meta">copyright</span>,
-            <span class="entry-meta">wallpaper</span>,
-            <span class="entry-meta">material culture</span>
+
+                <?php
+                //displaying custom taxonomy 'keywords'
+                $keywords_terms = wp_get_post_terms($post->ID, 'keywords');
+                    $i = 0;
+                    foreach ( $keywords_terms as $term ) { $i++;
+                        if ( $i > 1 ) {
+                            echo ', ';
+                        }
+                        echo '<span class="entry-meta">'.$term->name.'</span>';
+                    }
+
+                ?>
+
             <hr class="line-stroke">
             <div class="clearfix"></div>
             <?php
