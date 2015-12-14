@@ -9,6 +9,13 @@
 
 
 
+/*
+ *
+ * ================================================
+ *              Custom Metabox
+ * ================================================
+ *
+ */
 class Rational_Meta_Box {
     private $screens = array(
         'page',
@@ -31,8 +38,13 @@ class Rational_Meta_Box {
         ),
         array(
             'id' => 'published-by',
-            'label' => 'Published by',
+            'label' => 'Published By',
             'type' => 'text',
+        ),
+        array(
+            'id' => 'pdf',
+            'label' => 'PDF',
+            'type' => 'media',
         ),
     );
 
@@ -41,6 +53,7 @@ class Rational_Meta_Box {
      */
     public function __construct() {
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+        add_action( 'admin_footer', array( $this, 'admin_footer' ) );
         add_action( 'save_post', array( $this, 'save_post' ) );
     }
 
@@ -51,8 +64,8 @@ class Rational_Meta_Box {
     public function add_meta_boxes() {
         foreach ( $this->screens as $screen ) {
             add_meta_box(
-                'authors-section',
-                __( 'Authors Section', 'rational-metabox' ),
+                'authors-sections',
+                __( 'Author Section', 'Author(s) Section' ),
                 array( $this, 'add_meta_box_callback' ),
                 $screen,
                 'advanced',
@@ -68,8 +81,42 @@ class Rational_Meta_Box {
      */
     public function add_meta_box_callback( $post ) {
         wp_nonce_field( 'authors_section_data', 'authors_section_nonce' );
-        echo 'Please enter the authors into the section below.';
+        echo 'Please update the the author(s) and upload research pdf.';
         $this->generate_fields( $post );
+    }
+
+    /**
+     * Hooks into WordPress' admin_footer function.
+     * Adds scripts for media uploader.
+     */
+    public function admin_footer() {
+        ?><script>
+            // https://codestag.com/how-to-use-wordpress-3-5-media-uploader-in-theme-options/
+            jQuery(document).ready(function($){
+                if ( typeof wp.media !== 'undefined' ) {
+                    var _custom_media = true,
+                        _orig_send_attachment = wp.media.editor.send.attachment;
+                    $('.rational-metabox-media').click(function(e) {
+                        var send_attachment_bkp = wp.media.editor.send.attachment;
+                        var button = $(this);
+                        var id = button.attr('id').replace('_button', '');
+                        _custom_media = true;
+                        wp.media.editor.send.attachment = function(props, attachment){
+                            if ( _custom_media ) {
+                                $("#"+id).val(attachment.url);
+                            } else {
+                                return _orig_send_attachment.apply( this, [props, attachment] );
+                            };
+                        }
+                        wp.media.editor.open(button);
+                        return false;
+                    });
+                    $('.add_media').on('click', function(){
+                        _custom_media = false;
+                    });
+                }
+            });
+        </script><?php
     }
 
     /**
@@ -81,6 +128,16 @@ class Rational_Meta_Box {
             $label = '<label for="' . $field['id'] . '">' . $field['label'] . '</label>';
             $db_value = get_post_meta( $post->ID, 'authors_section_' . $field['id'], true );
             switch ( $field['type'] ) {
+                case 'media':
+                    $input = sprintf(
+                        '<input class="regular-text" id="%s" name="%s" type="text" value="%s"> <input class="button rational-metabox-media" id="%s_button" name="%s_button" type="button" value="Upload" />',
+                        $field['id'],
+                        $field['id'],
+                        $db_value,
+                        $field['id'],
+                        $field['id']
+                    );
+                    break;
                 default:
                     $input = sprintf(
                         '<input %s id="%s" name="%s" type="%s" value="%s">',
@@ -101,7 +158,7 @@ class Rational_Meta_Box {
      */
     public function row_format( $label, $input ) {
         return sprintf(
-            '<tr><th scope="row">%s</th><td>%s</td></tr>',
+            '<tr><th>%s</th><td>%s</td></tr>',
             $label,
             $input
         );
@@ -144,32 +201,6 @@ new Rational_Meta_Box;
 /*
  *
  * ================================================
- *              PDF Custom Attachment
- * ================================================
- *
- */
-
-
-
-add_filter( 'admin_post_thumbnail_html', 'add_featured_image_instruction');
-function add_featured_image_instruction( $content ) {
-    $content .= '<p><i>Upload the PDF of your research</i></p>';
-
-    return str_replace(__('Set featured image'), __('Upload PDF'),$content);
-}
-function upload_pdf() {
-    // Remove the orginal "Set Featured Image" Metabox
-    remove_meta_box('postimagediv', 'page', 'side');
-    // Add it again with another title
-    add_meta_box('postimagediv', __('PDF Section'), 'post_thumbnail_meta_box', 'page', 'normal', 'high');
-}
-add_action('do_meta_boxes', 'upload_pdf');
-
-
-
-/*
- *
- * ================================================
  *              Custom Taxonomy
  * ================================================
  *
@@ -206,3 +237,64 @@ function custom_taxonomy() {
 }
 
 add_action('init', 'custom_taxonomy');
+
+
+
+
+/*
+ *
+ * ================================================
+ *              Removing Metaboxes
+ * ================================================
+ *
+ */
+
+
+// REMOVE POST META BOXES
+function remove_page_metaboxes() {
+    //remove_meta_box( 'postcustom','page','normal' ); // Custom Fields Metabox
+    remove_meta_box( 'commentstatusdiv','page','normal' ); // Comments Metabox
+    remove_meta_box( 'trackbacksdiv','page','normal' ); // Talkback Metabox
+    remove_meta_box( 'slugdiv','page','normal' ); // Slug Metabox
+    remove_meta_box( 'authordiv','page','normal' ); // Author Metabox
+    remove_meta_box( 'postimagediv','page','normal' ); // Featured Image Metabox
+    remove_meta_box('tagsdiv-post_tag', 'page', 'normal');
+    remove_meta_box('categorydiv', 'page', 'normal');
+}
+add_action('admin_menu','remove_page_metaboxes');
+
+
+
+
+/*
+ *
+ * ================================================
+ *             Get PDF file size
+ * ================================================
+ *
+ */
+
+
+function remote_file_size($url)
+{
+    $data = get_headers($url, true);
+    if (isset($data['Content-Length'])) {
+        return (int)$data['Content-Length'];
+    } else {
+        return false;
+    }
+}
+
+
+function output_file_size($url)
+{
+    $bytes = remote_file_size($url);
+    if ($bytes != false) {
+        $mega_bytes = number_format($bytes / 1000000, 2);
+        return $mega_bytes . ' MB';
+    }
+    else {
+        return 'No file found at ' . $url;
+    }
+}
+
