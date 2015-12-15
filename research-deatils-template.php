@@ -56,7 +56,7 @@ get_header();
                     }
                 ?>
 
-            <hr class="line-stroke">
+            <!--<hr class="line-stroke">-->
             <div class="clearfix"></div>
             <span class="entry-meta"><strong>Keywords:</strong> </span>
 
@@ -78,7 +78,15 @@ get_header();
                 the_content();
             ?>
             <div class="clearfix"></div>
-            <a class="button float-right" href="#">Download PDF (123KB)</a>
+            <!--  <a class="button float-right" href="#">Download PDF (123KB)</a>-->
+            <?php
+                $research_pdf = get_post_meta( $post->ID, 'authors_section_pdf', true );
+                $pdf_size = output_file_size($research_pdf);
+                if (!empty ($research_pdf)) {
+                    echo '<a class="button float-right" target="_blank" href="'.$research_pdf.'">View (PDF, '.$pdf_size.')</a>';
+                }
+
+            ?>
         </div>
         <!--  Research ends here-->
     </div>
