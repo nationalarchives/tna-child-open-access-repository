@@ -44,7 +44,7 @@ get_header();
             <span class="entry-meta"><strong>Date of publication:</strong>
                 <?php
                     $date_published = get_post_meta( $post->ID, 'authors_section_date-published', true );
-                    $format_date = date("d/m/Y", strtotime($date_published));
+                    $format_date = date('d F Y', strtotime($date_published));
                     echo $format_date;
                 ?>
             </span>
