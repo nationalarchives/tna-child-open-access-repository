@@ -96,7 +96,6 @@ get_header();
 </div>
 </div>
 
-<a id="goTop"></a>
 
 
 
