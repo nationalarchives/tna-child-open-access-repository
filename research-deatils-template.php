@@ -83,7 +83,7 @@ get_header();
                 $research_pdf = get_post_meta( $post->ID, 'authors_section_pdf', true );
                 $pdf_size = output_file_size($research_pdf);
                 if (!empty ($research_pdf)) {
-                    echo '<a class="button float-right" target="_blank" href="'.$research_pdf.'">View (PDF, '.$pdf_size.')</a>';
+                    echo '<a class="button float-right bottom-spacing" target="_blank" href="'.$research_pdf.'">View (PDF, '.$pdf_size.')</a>';
                 }
 
             ?>
@@ -91,14 +91,9 @@ get_header();
         <!--  Research ends here-->
     </div>
     <?php //sidebar comes here
-    get_sidebar(  );
+      get_sidebar(  );
     ?>
+  </div>
 </div>
-</div>
-
-
-
-
-
 <?php
 get_footer();

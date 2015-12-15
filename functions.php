@@ -298,3 +298,25 @@ function output_file_size($url)
     }
 }
 
+
+
+/*
+ *
+ * ================================================
+ *             Menu Side Bar
+ * ================================================
+ *
+ */
+
+add_theme_support( 'menus' );
+
+
+function register_theme_menus () {
+    register_nav_menus(
+        array(
+            'sidebar-menu' => __( 'Sidebar menu' )
+        )
+    );
+}
+add_action ( 'init', 'register_theme_menus' );
+
