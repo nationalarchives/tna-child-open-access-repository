@@ -75,7 +75,11 @@ get_header();
             <hr class="line-stroke">
             <div class="clearfix"></div>
             <?php
-                the_content();
+                if (have_posts()) :
+                    while (have_posts()) : the_post();
+                         the_content();
+                    endwhile;
+               endif;
             ?>
             <div class="clearfix"></div>
             <!--  <a class="button float-right" href="#">Download PDF (123KB)</a>-->
