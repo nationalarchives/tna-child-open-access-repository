@@ -17,5 +17,5 @@
            </span>
         </h2>
     </div>
-        <?php wp_nav_menu( $defaults ); ?>
+    <?php wp_nav_menu( $defaults ); ?>
 </div>
