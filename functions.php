@@ -77,7 +77,7 @@ class Rational_Meta_Box {
     /**
      * Generates the HTML for the meta box
      *
-     * @param object $post WordPress post object
+     *
      */
     public function add_meta_box_callback( $post ) {
         wp_nonce_field( 'authors_section_data', 'authors_section_nonce' );
@@ -86,8 +86,8 @@ class Rational_Meta_Box {
     }
 
     /**
-     * Hooks into WordPress' admin_footer function.
-     * Adds scripts for media uploader.
+     * Hooks into WordPress' admin function.
+     * Added scripts for media uploader.
      */
     public function admin_footer() {
         ?><script>
