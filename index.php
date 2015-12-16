@@ -38,12 +38,30 @@ get_header();
                 <?php if ($child -> have_posts()) : while ($child -> have_posts()) : $child -> the_post(); ?>
                    <div class="breather">
                        <div class="resource-block">
-                            <a href="<?php get_the_permalink(); ?>" title="<?php the_title(); ?>">
+                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
                                 <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
                             </a>
                                 <div class="clearfix"></div>
-                                <span class="entry-meta"><strong>Author(s):</strong></span>
-                                 <span class="entry-meta">Julie Halls</span>
+                                <span class="entry-meta">
+                                    <?php
+                                        $other_authors = get_post_meta( $post->ID, 'authors_section_other-authors', true );
+                                        if (empty ($other_authors)) {
+                                            echo '<strong>Author:</strong>';
+                                        } else {
+                                            echo '<strong>Authors:</strong>';
+                                        }
+                                    ?>
+                                </span>
+                                <span class="entry-meta">
+                                    <?php
+                                        $lead_author = get_post_meta( $post->ID, 'authors_section_lead-author', true );
+                                        echo $lead_author;
+
+                                        if (!empty ($other_authors)) {
+                                            echo ', '.$other_authors;
+                                        }
+                                    ?>
+                                </span>
                                 <div class="clearfix"></div>
                             <p><?php the_excerpt(); ?>
                             </p>
