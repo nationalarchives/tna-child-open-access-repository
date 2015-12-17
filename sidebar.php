@@ -12,7 +12,7 @@
         <h2>
            <span>
               <span>
-                 You may also be interested in
+                 Also in Research and scholarship
               </span>
            </span>
         </h2>

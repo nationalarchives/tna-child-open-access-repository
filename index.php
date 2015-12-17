@@ -25,12 +25,15 @@ get_header();
                 <?php endif; wp_reset_query(); ?>
                 <div class="col starts-at-full ends-at-full boc margin-none clr">
                     <?php
+
+                        $lead_author = get_post_meta( $post->ID, 'authors_section_lead-author', true );
                         $args = array(
                                 'post_type'      => 'page',
                                 'posts_per_page' => -1,
                                 'post_parent'    => $post->ID,
                                 'order'          => 'ASC',
-                                'orderby'        => 'menu_order'
+                                'orderby' => 'meta_value',
+                                'meta_key' => 'authors_section_lead-author',
                              );
 
                         $child = new WP_Query( $args );
@@ -67,8 +70,9 @@ get_header();
                             </p>
 
                         </div>
+                        <hr class="line-stroke">
                     </div>
-                    <hr class="line-stroke">
+
                     <?php endwhile; else: ?>
                           <p>Sorry, no content</p>
                 <?php endif; wp_reset_query();?>
