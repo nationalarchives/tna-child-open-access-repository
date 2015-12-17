@@ -275,29 +275,29 @@ add_action('admin_menu','remove_page_metaboxes');
  */
 
 
-function remote_file_size($url)
-{
-    $data = get_headers($url, true);
-    if (isset($data['Content-Length'])) {
-        return (int)$data['Content-Length'];
+
+// retrieves the attachment ID from the file URL
+function get_pdf_id($pdf_url) {
+    global $wpdb;
+    $attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $pdf_url ));
+    return $attachment[0];
+}
+
+//Size conversion
+function formatSizeUnits($bytes) {
+    if ($bytes >= 1048576) {
+        $bytes = number_format($bytes / 1048576, 2) . ' MB';
+    } elseif ($bytes >= 1024) {
+        $bytes = number_format($bytes / 1024, 2) . ' KB';
+    } elseif ($bytes > 1) {
+        $bytes = $bytes . ' bytes';
+    } elseif ($bytes == 1) {
+        $bytes = $bytes . ' byte';
     } else {
-        return false;
+        $bytes = '0 bytes';
     }
+    return $bytes;
 }
-
-
-function output_file_size($url)
-{
-    $bytes = remote_file_size($url);
-    if ($bytes != false) {
-        $mega_bytes = number_format($bytes / 1000000, 2);
-        return $mega_bytes . ' MB';
-    }
-    else {
-        return 'No file found at ' . $url;
-    }
-}
-
 
 
 /*

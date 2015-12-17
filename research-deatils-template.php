@@ -82,14 +82,17 @@ get_header();
                endif;
             ?>
             <div class="clearfix"></div>
+
             <?php
                 $research_pdf = get_post_meta( $post->ID, 'authors_section_pdf', true );
-                $pdf_size = output_file_size($research_pdf);
+                $pdf_id = get_pdf_id($research_pdf);
+                $file_path = filesize(get_attached_file($pdf_id));
+                $pdf_size = $file_path;
                 if (!empty ($research_pdf)) {
-                    echo '<a class="button float-right bottom-spacing" target="_blank" href="'.$research_pdf.'">View (PDF, '.$pdf_size.')</a>';
+                    echo '<a class="button float-right bottom-spacing" target="_blank" href="'.$research_pdf.'">View (PDF, '.formatSizeUnits($pdf_size).')</a>';
                 }
-
             ?>
+
         </div>
         <!--  Research ends here-->
     </div>
