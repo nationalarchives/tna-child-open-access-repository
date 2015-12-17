@@ -284,19 +284,19 @@ function get_pdf_id($pdf_url) {
 }
 
 //Size conversion
-function formatSizeUnits($bytes) {
-    if ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . ' MB';
-    } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . ' KB';
-    } elseif ($bytes > 1) {
-        $bytes = $bytes . ' bytes';
-    } elseif ($bytes == 1) {
-        $bytes = $bytes . ' byte';
+function formatSizeUnits($pdf_size) {
+    if ($pdf_size >= 1048576) {
+        $pdf_size = number_format($pdf_size / 1048576, 2) . ' MB';
+    } elseif ($pdf_size >= 1024) {
+        $pdf_size = number_format($pdf_size / 1024, 2) . ' KB';
+    } elseif ($pdf_size > 1) {
+        $pdf_size = $pdf_size . ' bytes';
+    } elseif ($pdf_size == 1) {
+        $pdf_size = $pdf_size . ' byte';
     } else {
-        $bytes = '0 bytes';
+        $pdf_size = '0 bytes';
     }
-    return $bytes;
+    return $pdf_size;
 }
 
 
