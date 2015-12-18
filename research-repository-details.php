@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: OA Research details template
+Template Name: Research repository details
 */
 
 get_header();
