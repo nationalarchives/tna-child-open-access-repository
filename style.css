@@ -1,10 +1,10 @@
 /*
-Theme Name: TNA - Open Access Repository - Child
-Theme URI: http://nationalarchives.gov.uk/
+Theme Name: About us - Research
+Theme URI: http://www.nationalarchives.gov.uk/
 Author: The National Archives
-Author URI: http://nationalarchives.gov.uk/
+Author URI: http://www.nationalarchives.gov.uk/
 Template: tna
-Description: Child Theme used for the Open Access Repository for website of The National Archives
+Description: Child Theme used for the research section of About us of The National Archives web site
 Version: 0.1
 License: GNU General Public License
 License URI: license.txt
@@ -12,3 +12,19 @@ Text Domain: tna
 Domain Path: /languages/
 */
 
+h3 {
+    margin:0;
+}
+
+hr.line-stroke{
+    border-top: 1px solid #EFEFEF;
+    background-image:none
+}
+
+.bottom-spacing{
+    margin-bottom: 20px;
+}
+
+.breather>h2 {
+    margin:0;
+}
