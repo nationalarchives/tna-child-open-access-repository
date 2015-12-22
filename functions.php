@@ -320,3 +320,18 @@ function register_theme_menus () {
 }
 add_action ( 'init', 'register_theme_menus' );
 
+
+
+/*
+ *
+ * ================================================
+ *             Enabling Categories
+ * ================================================
+ *
+ */
+
+function enable_categories_on_pages() {
+    register_taxonomy_for_object_type('post_tag', 'page');
+    register_taxonomy_for_object_type('category', 'page');
+}
+add_action( 'init', 'enable_categories_on_pages' );
