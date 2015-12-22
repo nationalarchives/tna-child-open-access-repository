@@ -243,45 +243,54 @@ add_action('init', 'custom_taxonomy');
 
 /*
  *
- * ================================================
- *              Removing Metaboxes
- * ================================================
+ * ================================================================================================
+ *              Removing Metaboxes & Post Tags from Child Theme
+ * ================================================================================================
  *
  */
 
 
 // REMOVE POST META BOXES
-function remove_page_metaboxes() {
-    //remove_meta_box( 'postcustom','page','normal' ); // Custom Fields Metabox
-    remove_meta_box( 'commentstatusdiv','page','normal' ); // Comments Metabox
-    remove_meta_box( 'trackbacksdiv','page','normal' ); // Talkback Metabox
-    remove_meta_box( 'slugdiv','page','normal' ); // Slug Metabox
-    remove_meta_box( 'authordiv','page','normal' ); // Author Metabox
-    remove_meta_box( 'postimagediv','page','normal' ); // Featured Image Metabox
-    remove_meta_box('tagsdiv-post_tag', 'page', 'normal');
-    remove_meta_box('categorydiv', 'page', 'normal');
-}
-add_action('admin_menu','remove_page_metaboxes');
-
-
-
-
-/*
- *
- * ================================================
- *              Removing Post Types
- * ================================================
- *
- */
-
-if (!function_exists('hide_menu_items')) {
-    function hide_menu_items() {
+if (!function_exists('remove_page_metaboxes')) {
+    function remove_page_metaboxes() {
+        //remove_meta_box( 'postcustom','page','normal' ); // Custom Fields Metabox
+        remove_meta_box('commentstatusdiv', 'page', 'normal'); // Comments Metabox
+        remove_meta_box('trackbacksdiv', 'page', 'normal'); // Talkback Metabox
+        remove_meta_box('slugdiv', 'page', 'normal'); // Slug Metabox
+        remove_meta_box('authordiv', 'page', 'normal'); // Author Metabox
+        remove_meta_box('postimagediv', 'page', 'normal'); // Featured Image Metabox
+        remove_meta_box('tagsdiv-post_tag', 'page', 'normal');
+        remove_meta_box('categorydiv', 'page', 'normal');
+        remove_meta_box( 'education resourcediv', 'page', 'side' );
+        remove_meta_box( 'guidancediv', 'page', 'side' );
         remove_menu_page( 'edit.php?post_type=im_guidance_link' );
         remove_menu_page( 'edit.php?post_type=online-exhibitions' );
         remove_menu_page( 'edit.php?post_type=lesson_sources' );
+        remove_menu_page( 'edit-tags.php?taxonomy=guidance' );
+        //remove_post_type_support( 'page', 'guidance' );
+        register_taxonomy( 'education resource', 'page', array('show_ui' => false, 'show_admin_column' => false));
     }
 }
-add_action( 'admin_menu', 'hide_menu_items' );
+add_action('admin_menu','remove_page_metaboxes');
+
+//$taxonomy = array('guidance');
+function unregister_taxonomies( $taxonomy = array('guidance') ) {
+   // var_dump($taxonomy);
+   // exit();
+    global $wp_taxonomies;
+    // Allow an array of taxonomies to be passed. Default to tags and categories if nothing was passed.
+    $taxonomy = ( !empty( $taxonomy ) && is_array( $taxonomy ) ) ? $taxonomy : array( 'post_tag' );
+  //var_dump($taxonomy);
+    //exit();
+    foreach ( $taxonomy as $taxonomy ) {
+        //var_dump($taxonomy);
+        if ( taxonomy_exists( $taxonomy ) ) {
+            unset( $wp_taxonomies[ $taxonomy ] );
+            //register_taxonomy( 'education resource', 'page', array('show_ui' => false, 'show_admin_column' => false));
+        }
+    }
+}
+add_action( 'init', 'unregister_taxonomies' );
 
 
 
@@ -341,17 +350,3 @@ function register_theme_menus () {
 add_action ( 'init', 'register_theme_menus' );
 
 
-
-/*
- *
- * ================================================
- *             Enabling Categories
- * ================================================
- *
- */
-
-function enable_categories_on_pages() {
-    register_taxonomy_for_object_type('post_tag', 'page');
-    register_taxonomy_for_object_type('category', 'page');
-}
-add_action( 'init', 'enable_categories_on_pages' );
