@@ -36,7 +36,7 @@ get_header();
                     echo $lead_author;
 
                     if (!empty ($other_authors)) {
-                        echo ', '.$other_authors;
+                        echo '; '.$other_authors;
                     }
                 ?>
             </span>
