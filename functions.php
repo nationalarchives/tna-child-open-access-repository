@@ -269,6 +269,26 @@ add_action('admin_menu','remove_page_metaboxes');
 /*
  *
  * ================================================
+ *              Removing Post Types
+ * ================================================
+ *
+ */
+
+if (!function_exists('hide_menu_items')) {
+    function hide_menu_items() {
+        remove_menu_page( 'edit.php?post_type=im_guidance_link' );
+        remove_menu_page( 'edit.php?post_type=online-exhibitions' );
+        remove_menu_page( 'edit.php?post_type=lesson_sources' );
+    }
+}
+add_action( 'admin_menu', 'hide_menu_items' );
+
+
+
+
+/*
+ *
+ * ================================================
  *             Get PDF file size
  * ================================================
  *
