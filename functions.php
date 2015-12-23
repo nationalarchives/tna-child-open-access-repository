@@ -253,7 +253,6 @@ add_action('init', 'custom_taxonomy');
 // REMOVE POST META BOXES
 if (!function_exists('remove_page_metaboxes')) {
     function remove_page_metaboxes() {
-        //remove_meta_box( 'postcustom','page','normal' ); // Custom Fields Metabox
         remove_meta_box('commentstatusdiv', 'page', 'normal'); // Comments Metabox
         remove_meta_box('trackbacksdiv', 'page', 'normal'); // Talkback Metabox
         remove_meta_box('slugdiv', 'page', 'normal'); // Slug Metabox
@@ -266,31 +265,34 @@ if (!function_exists('remove_page_metaboxes')) {
         remove_menu_page( 'edit.php?post_type=im_guidance_link' );
         remove_menu_page( 'edit.php?post_type=online-exhibitions' );
         remove_menu_page( 'edit.php?post_type=lesson_sources' );
-        remove_menu_page( 'edit-tags.php?taxonomy=guidance' );
-        //remove_post_type_support( 'page', 'guidance' );
-        register_taxonomy( 'education resource', 'page', array('show_ui' => false, 'show_admin_column' => false));
     }
 }
 add_action('admin_menu','remove_page_metaboxes');
 
+
+/*
+ *
+ * Removing custom taxonomies.
+ *
+ */
 //$taxonomy = array('guidance');
-function unregister_taxonomies( $taxonomy = array('guidance') ) {
-   // var_dump($taxonomy);
-   // exit();
+function unregister_taxonomies( $taxonomy = array('') ) { //add into the array the custom taxonomies you would like to remove!
+    //var_dump($taxonomy);
+    //exit();
     global $wp_taxonomies;
     // Allow an array of taxonomies to be passed. Default to tags and categories if nothing was passed.
-    $taxonomy = ( !empty( $taxonomy ) && is_array( $taxonomy ) ) ? $taxonomy : array( 'post_tag' );
-  //var_dump($taxonomy);
-    //exit();
+    $taxonomy = ( !empty( $taxonomy ) && is_array( $taxonomy ) ) ? $taxonomy : array( 'post_tag', 'guidance', 'education resource' );//will default to this array.
+   //var_dump($taxonomy);
+   //exit();
     foreach ( $taxonomy as $taxonomy ) {
         //var_dump($taxonomy);
         if ( taxonomy_exists( $taxonomy ) ) {
             unset( $wp_taxonomies[ $taxonomy ] );
-            //register_taxonomy( 'education resource', 'page', array('show_ui' => false, 'show_admin_column' => false));
         }
     }
 }
 add_action( 'init', 'unregister_taxonomies' );
+
 
 
 
