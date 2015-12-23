@@ -270,32 +270,6 @@ if (!function_exists('remove_page_metaboxes')) {
 add_action('admin_menu','remove_page_metaboxes');
 
 
-/*
- *
- * Removing custom taxonomies.
- *
- */
-//$taxonomy = array('guidance');
-function unregister_taxonomies( $taxonomy = array('') ) { //add into the array the custom taxonomies you would like to remove!
-    //var_dump($taxonomy);
-    //exit();
-    global $wp_taxonomies;
-    // Allow an array of taxonomies to be passed. Default to tags and categories if nothing was passed.
-    $taxonomy = ( !empty( $taxonomy ) && is_array( $taxonomy ) ) ? $taxonomy : array( 'post_tag', 'guidance', 'education resource' );//will default to this array.
-   //var_dump($taxonomy);
-   //exit();
-    foreach ( $taxonomy as $taxonomy ) {
-        //var_dump($taxonomy);
-        if ( taxonomy_exists( $taxonomy ) ) {
-            unset( $wp_taxonomies[ $taxonomy ] );
-        }
-    }
-}
-add_action( 'init', 'unregister_taxonomies' );
-
-
-
-
 
 /*
  *
