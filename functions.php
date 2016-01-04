@@ -316,15 +316,13 @@ define('SUB_SITE_ROOT_URL', '/about/our-role');
 
 function fix_internal_url($url) {
     $arrUrl = parse_url($url);
-
-    if ( strpos( $arrUrl[ 'host' ], 'devlb' ) === true ||
-        strpos( $arrUrl[ 'host' ], 'testlb' ) === true ||
-        strpos( $arrUrl[ 'host' ], 'livelb' ) === true ||
-        strpos( $arrUrl[ 'host' ], 'tna-child-dev' ) === true ){
-        return $url;
-    }
+/*    if ( is_numeric(strpos( $arrUrl[ 'host' ], 'devlb' )) ||
+         is_numeric(strpos( $arrUrl[ 'host' ], 'testlb')) ||
+         is_numeric(strpos( $arrUrl[ 'host' ], 'livelb')) ||
+         is_numeric(strpos( $arrUrl[ 'host' ], 'tna-child-dev')) ){
+        return is_numeric(strpos( $arrUrl[ 'host' ], 'testlb'));
+    }*/
     return SUB_SITE_ROOT_URL . $arrUrl[ 'path' ];
-
 }
 
 
