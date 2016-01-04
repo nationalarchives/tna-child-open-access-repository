@@ -1,14 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pchotrani
- * Date: 09/12/15
- * Time: 11:38
- */
-
-
-
-
 /*
  *
  * ================================================
@@ -210,17 +200,17 @@ new Rational_Meta_Box;
 function custom_taxonomy() {
 
     $labels = array(
-        'name' => 'Keywords',
+        'name' => 'Repository keywords',
         'singular_name' => 'Keyword',
         'search_items' => 'Search Keyword',
-        'all_items' => 'All Keywords',
-        'parent_item' => 'Parent Keyword',
-        'parent_item_colon' => 'Parent Keyword:',
-        'edit_item' => 'Edit Keyword',
-        'update_item' => 'Update Keyword',
-        'add_new_item' => 'Add New Keyword Type',
-        'new_item_name' => 'New Keyword Name',
-        'menu_name' => 'Keywords'
+        'all_items' => 'All keywords',
+        'parent_item' => 'Parent keyword',
+        'parent_item_colon' => 'Parent keyword:',
+        'edit_item' => 'Edit keyword',
+        'update_item' => 'Update keyword',
+        'add_new_item' => 'Add new keyword type',
+        'new_item_name' => 'New keyword name',
+        'menu_name' => 'Repository keywords'
     );
 
     $args = array(
@@ -243,26 +233,26 @@ add_action('init', 'custom_taxonomy');
 
 /*
  *
- * ================================================
- *              Removing Metaboxes
- * ================================================
+ * ================================================================================================
+ *              Removing Metaboxes & Post Tags from Child Theme
+ * ================================================================================================
  *
  */
 
 
 // REMOVE POST META BOXES
-function remove_page_metaboxes() {
-    //remove_meta_box( 'postcustom','page','normal' ); // Custom Fields Metabox
-    remove_meta_box( 'commentstatusdiv','page','normal' ); // Comments Metabox
-    remove_meta_box( 'trackbacksdiv','page','normal' ); // Talkback Metabox
-    remove_meta_box( 'slugdiv','page','normal' ); // Slug Metabox
-    remove_meta_box( 'authordiv','page','normal' ); // Author Metabox
-    remove_meta_box( 'postimagediv','page','normal' ); // Featured Image Metabox
-    remove_meta_box('tagsdiv-post_tag', 'page', 'normal');
-    remove_meta_box('categorydiv', 'page', 'normal');
+if (!function_exists('remove_page_metaboxes')) {
+    function remove_page_metaboxes() {
+        remove_meta_box('commentstatusdiv', 'page', 'normal'); // Comments Metabox
+        remove_meta_box('trackbacksdiv', 'page', 'normal'); // Talkback Metabox
+        remove_meta_box('slugdiv', 'page', 'normal'); // Slug Metabox
+        remove_meta_box('authordiv', 'page', 'normal'); // Author Metabox
+        remove_meta_box('postimagediv', 'page', 'normal'); // Featured Image Metabox
+        remove_meta_box('postcustom', 'page', 'normal');
+        remove_meta_box('commentsdiv', 'page', 'normal');
+    }
 }
 add_action('admin_menu','remove_page_metaboxes');
-
 
 
 
@@ -320,3 +310,49 @@ function register_theme_menus () {
 }
 add_action ( 'init', 'register_theme_menus' );
 
+
+/*
+ *
+ * ================================================
+ *    Override unneeded functions from parent
+ * ================================================
+ *
+ */
+
+
+function education_resource_init () {
+	// remove
+}
+function my_add_excerpts_to_pages () {
+	// remove
+}
+function create_post_type () {
+	// remove
+}
+function create_post_type2 () {
+	// remove
+}
+function get_indicator () {
+	// remove
+}
+function get_glossary () {
+	// remove
+}
+function guidance_init () {
+	// remove
+}
+function m_explode () {
+	// remove
+}
+function banner_messages () {
+	// remove
+}
+function create_events_cpt () {
+	// remove
+}
+function include_template_function () {
+	// remove
+}
+function flexslider_shortcode () {
+	// remove
+}
