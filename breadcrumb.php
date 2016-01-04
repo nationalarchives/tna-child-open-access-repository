@@ -1,21 +1,14 @@
 <div class="row" id="breadcrumb-holder">
     <div class="col starts-at-full clr">
         <div id="breadcrumb">
-            <span class="first"><a href="/">Home</a> &gt;</span>
+            <span class="first"><a href="/">Home</a> &gt;</span> <a href="/about/">About us</a> &gt; <a href="/about/our-role/">Our role</a> &gt;
             <?php if ( function_exists('yoast_breadcrumb') ) {
-                yoast_breadcrumb();
+                $breadcrumbs = yoast_breadcrumb('','',false);
+                $pattern = "/http:\/\/(.*?)\.gov.uk/";
+                $replace = "/about/our-role";
+                $breadcrumbs = preg_replace($pattern, $replace, $breadcrumbs);
+                echo $breadcrumbs;
             } ?>
-
-            <?php if (current_user_can( 'manage_options' )) {
-
-                if (!has_post_thumbnail() ) {
-
-                    ?>
-
-                    <!--<div class="float-right"><a href="/wp-admin/media-upload.php?post_id=<?php //echo $post->ID; ?>&type=image&TB_iframe=1" target="_blank" class="button">Add featured image</a></div>-->
-                <?php } }?>
         </div>
     </div>
 </div>
-
-  

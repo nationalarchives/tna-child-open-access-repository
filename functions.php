@@ -311,6 +311,27 @@ function register_theme_menus () {
 add_action ( 'init', 'register_theme_menus' );
 
 
+
+define('SUB_SITE_ROOT_URL', '/about/our-role');
+
+function fix_internal_url($url) {
+    $arrUrl = parse_url($url);
+
+    if ( strpos( $arrUrl[ 'host' ], 'devlb' ) === true ||
+        strpos( $arrUrl[ 'host' ], 'testlb' ) === true ||
+        strpos( $arrUrl[ 'host' ], 'livelb' ) === true ||
+        strpos( $arrUrl[ 'host' ], 'tna-child-dev' ) === true ){
+        return $url;
+    }
+    return SUB_SITE_ROOT_URL . $arrUrl[ 'path' ];
+
+}
+
+
+
+
+
+
 /*
  *
  * ================================================
