@@ -5,7 +5,7 @@
             <?php if ( function_exists('yoast_breadcrumb') ) {
                 $breadcrumbs = yoast_breadcrumb('','',false);
                 $pattern = "/http:\/\/(.*?)\.gov.uk/";
-                $replace = "/about/our-role";
+                $replace = SUB_SITE_ROOT_URL;
                 $breadcrumbs = preg_replace($pattern, $replace, $breadcrumbs);
                 echo $breadcrumbs;
             } ?>
