@@ -41,7 +41,7 @@ get_header();
                 <?php if ($child -> have_posts()) : while ($child -> have_posts()) : $child -> the_post(); ?>
                    <div class="breather">
                        <div class="resource-block">
-                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                            <a href="<?php echo fix_internal_url(get_permalink()); ?>" title="<?php the_title(); ?>">
                                 <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
                             </a>
                                 <div class="clearfix"></div>
@@ -61,7 +61,7 @@ get_header();
                                         echo $lead_author;
 
                                         if (!empty ($other_authors)) {
-                                            echo ', '.$other_authors;
+                                            echo '; '.$other_authors;
                                         }
                                     ?>
                                 </span>
