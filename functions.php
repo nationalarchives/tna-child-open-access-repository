@@ -363,9 +363,6 @@ function guidance_init () {
 function m_explode () {
 	// remove
 }
-function banner_messages () {
-	// remove
-}
 function create_events_cpt () {
 	// remove
 }
