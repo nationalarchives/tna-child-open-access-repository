@@ -40,7 +40,7 @@ get_header();
                     ?>
                 <?php if ($child -> have_posts()) : while ($child -> have_posts()) : $child -> the_post(); ?>
                    <div class="breather">
-                       <div class="resource-block">
+                       <div>
                             <a href="<?php echo fix_internal_url(get_permalink()); ?>" title="<?php the_title(); ?>">
                                 <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
                             </a>
