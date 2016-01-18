@@ -1,8 +1,16 @@
 <?php
-/* DEFINE SITE CONSTANTS
-THESE MUST NOT HAVE BEEN DEFINED IN THE PARENT THEME!!
+/* DEFINE SITE VARIABLES
 */
-define('SUB_SITE_ROOT_URL', '/about/our-role');
+
+function tnatheme_globals() {
+    global $tnatheme;
+    if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
+        $tnatheme['subsitepath'] = '';
+    } else {
+        $tnatheme['subsitepath'] = '/about/our-role';
+    }
+}
+
 
 
 
