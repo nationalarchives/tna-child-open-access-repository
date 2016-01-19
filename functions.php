@@ -1,7 +1,7 @@
 <?php
-/* DEFINE SITE VARIABLES
-*/
-
+/* 
+ * REGISTER SITE GLOBAL VARIABLES 
+ */
 function tnatheme_globals() {
     global $tnatheme;
     if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
