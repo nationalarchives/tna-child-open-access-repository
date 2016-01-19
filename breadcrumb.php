@@ -9,3 +9,4 @@
         </div>
     </div>
 </div>
+<? print_r($GLOBALS['tnatheme']['subsitepath']);

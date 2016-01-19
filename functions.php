@@ -10,7 +10,7 @@ function tnatheme_globals() {
         $tnatheme['subsitepath'] = '/about/our-role';
     }
 }
-
+tnatheme_globals();
 
 
 
