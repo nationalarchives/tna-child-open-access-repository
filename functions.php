@@ -1,4 +1,20 @@
 <?php
+/* 
+ * REGISTER SITE GLOBAL VARIABLES 
+ */
+function tnatheme_globals() {
+    global $tnatheme;
+    if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
+        $tnatheme['subsitepath'] = '';
+    } else {
+        $tnatheme['subsitepath'] = '/about/our-role';
+    }
+}
+tnatheme_globals();
+
+
+
+
 /*
  *
  * ================================================
@@ -309,23 +325,6 @@ function register_theme_menus () {
     );
 }
 add_action ( 'init', 'register_theme_menus' );
-
-
-
-define('SUB_SITE_ROOT_URL', '/about/our-role');
-
-function fix_internal_url($url) {
-    $arrUrl = parse_url($url);
-/*    if ( is_numeric(strpos( $arrUrl[ 'host' ], 'devlb' )) ||
-         is_numeric(strpos( $arrUrl[ 'host' ], 'testlb')) ||
-         is_numeric(strpos( $arrUrl[ 'host' ], 'livelb')) ||
-         is_numeric(strpos( $arrUrl[ 'host' ], 'tna-child-dev')) ){
-        return is_numeric(strpos( $arrUrl[ 'host' ], 'testlb'));
-    }*/
-    return SUB_SITE_ROOT_URL . $arrUrl[ 'path' ];
-}
-
-
 
 
 
