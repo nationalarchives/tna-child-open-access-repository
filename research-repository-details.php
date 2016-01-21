@@ -52,7 +52,7 @@ get_header();
                 <?php
                     $published_by = get_post_meta( $post->ID, 'authors_section_published-by', true );
                     if (!empty($published_by)) {
-                        echo '<span class="entry-meta"><strong>Published by:</strong> '.$published_by.'</span>';
+                        echo '<span class="entry-meta"><strong>Published in:</strong> '.$published_by.'</span>';
                     }
                 ?>
 

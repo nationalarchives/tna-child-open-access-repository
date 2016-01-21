@@ -12,7 +12,7 @@ get_header();
                 <?php $feat_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID)); ?>
                     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                         <div class="image-container large position-relative pad-top-medium"
-                             style="background-image: url('<?php echo $feat_image; ?>')">
+                             style="background-image: url('<?php echo preg_replace('/https?:\/\/research.(live|dev|test)lb\.nationalarchives\.gov\.uk\//','/', $feat_image); ?>')">
                                 <h1 class="margin-none">
                                 <span>
                                     <span><?php the_title(); ?></span>
