@@ -5,7 +5,7 @@ Template Name: Research repository landing
 get_header();
 ?>
     <div class="container" id="page_wrap" role="main">
-        <?php include 'breadcrumb.php'; ?>
+        <?php include get_template_directory() . '/breadcrumb.php'; ?>
         <div class="row">
             <div class="col starts-at-full ends-at-two-thirds box clr">
 
