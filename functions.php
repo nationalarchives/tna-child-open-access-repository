@@ -4,15 +4,20 @@
  */
 function tnatheme_globals() {
     global $tnatheme;
+    $tnatheme['ischildsite'] = 1;
+    $tnatheme['childsitename'] = 'Research and scholarship';
     if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $tnatheme['subsitepath'] = '';
+        $tnatheme['subsitepatharr'] = array();
     } else {
         $tnatheme['subsitepath'] = '/about/our-role';
+        $tnatheme['subsitepatharr'] = array(
+        	'About us' => '/about/',
+        	'Our role' => '/about/our-role/'
+        	);
     }
 }
 tnatheme_globals();
-
-
 
 
 /*
