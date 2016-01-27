@@ -12,6 +12,10 @@ Text Domain: tna
 Domain Path: /languages/
 */
 
+.research-scholarship-landing-page {
+    background: #fff url("http://www.nationalarchives.gov.uk/images/about/research-scholarship-landing-image.jpg") no-repeat top center;
+}
+
 h3 {
     margin:0;
 }
