@@ -10,7 +10,7 @@ function tnatheme_globals() {
         $tnatheme['subsitepath'] = '';
         $tnatheme['subsitepatharr'] = array();
     } else {
-        $tnatheme['subsitepath'] = '/about/our-role';
+        $tnatheme['subsitepath'] = '/about/our-role/research-and-scholarship';
         $tnatheme['subsitepatharr'] = array(
         	'About us' => '/about/',
         	'Our role' => '/about/our-role/'
