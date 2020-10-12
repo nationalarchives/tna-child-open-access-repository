@@ -2,19 +2,26 @@
 /* 
  * REGISTER SITE GLOBAL VARIABLES 
  */
+
 function tnatheme_globals() {
     global $tnatheme;
     $tnatheme['ischildsite'] = 1;
     $tnatheme['childsitename'] = 'Research and scholarship';
-    if (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
+    if (isset($_SERVER['HTTP_X_NGINX_PROXY'])) {
+        $tnatheme['subsitepath'] = '/about/our-role/research-and-scholarship';
+        $tnatheme['subsitepatharr'] = array(
+            'About us' => '/about/',
+            'Our role' => '/about/our-role/'
+        );
+    } elseif (substr($_SERVER['REMOTE_ADDR'], 0, 3) === '10.') {
         $tnatheme['subsitepath'] = '';
         $tnatheme['subsitepatharr'] = array();
     } else {
         $tnatheme['subsitepath'] = '/about/our-role/research-and-scholarship';
         $tnatheme['subsitepatharr'] = array(
-        	'About us' => '/about/',
-        	'Our role' => '/about/our-role/'
-        	);
+            'About us' => '/about/',
+            'Our role' => '/about/our-role/'
+        );
     }
 }
 tnatheme_globals();
