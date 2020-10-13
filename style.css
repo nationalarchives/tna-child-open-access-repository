@@ -5,12 +5,16 @@ Author: The National Archives
 Author URI: http://www.nationalarchives.gov.uk/
 Template: tna
 Description: Child Theme used for the research section of About us of The National Archives web site
-Version: 1.0
+Version: 1.1
 License: GNU General Public License
 License URI: license.txt
 Text Domain: tna
 Domain Path: /languages/
 */
+
+.research-scholarship-landing-page {
+    background: #fff url("http://www.nationalarchives.gov.uk/images/about/research-scholarship-landing-image.jpg") no-repeat top center;
+}
 
 h3 {
     margin:0;
