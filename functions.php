@@ -7,7 +7,8 @@ function tnatheme_globals() {
     global $tnatheme;
     $tnatheme['ischildsite'] = 1;
     $tnatheme['childsitename'] = 'Research and scholarship';
-    if (isset($_SERVER['HTTP_X_NGINX_PROXY'])) {
+    $headers = apache_request_headers();
+    if ( isset($_SERVER['HTTP_X_NGINX_PROXY']) && isset($headers['X_HOST_TYPE']) && $headers['X_HOST_TYPE'] == 'public' ) {
         $tnatheme['subsitepath'] = '/about/our-role/research-and-scholarship';
         $tnatheme['subsitepatharr'] = array(
             'About us' => '/about/',
