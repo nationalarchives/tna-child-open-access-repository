@@ -3,10 +3,7 @@
   "version": "0.2.2",
   "devDependencies": {
     "grunt": "^1.5.2",
-    "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-cssmin": "^4.0.0",
-    "grunt-contrib-jshint": "^3.2.0",
-    "grunt-contrib-nodeunit": "^4.0.0",
     "grunt-contrib-sass": "^2.0.0",
     "grunt-contrib-watch": "^1.1.0"
   }
